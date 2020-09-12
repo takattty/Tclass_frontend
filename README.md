@@ -1,5 +1,7 @@
 # Tclass_frontend
 
+This is the frontend repo of Tclass
+
 ## Build Setup
 
 ```bash
