@@ -5,7 +5,7 @@ export default {
    ** Nuxt rendering mode
    ** See https://nuxtjs.org/api/configuration-mode
    */
-  mode: 'spa',
+  ssr: false,
   /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
@@ -58,8 +58,8 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
-    '@nuxtjs/auth',
     '@nuxtjs/dotenv',
+    '@nuxtjs/auth',
   ],
   /*
    ** Axios module configuration
@@ -73,7 +73,8 @@ export default {
   /**
    * Auth module configuration
    */
-  auth: {
+  /**
+   *   auth: {
     resirect: {
       login: '/login',
       loguot: '/login',
@@ -92,6 +93,7 @@ export default {
       },
     },
   },
+   */
   /**
    * Proxy module configuration
    * See https://github.com/nuxt-community/proxy-module
