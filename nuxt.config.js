@@ -73,8 +73,8 @@ export default {
   /**
    * Auth module configuration
    */
-  /**
-   *   auth: {
+
+  auth: {
     resirect: {
       login: '/login',
       loguot: '/login',
@@ -93,7 +93,6 @@ export default {
       },
     },
   },
-   */
   /**
    * Proxy module configuration
    * See https://github.com/nuxt-community/proxy-module
