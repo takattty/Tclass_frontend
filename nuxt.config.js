@@ -57,12 +57,50 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/proxy',
+    '@nuxtjs/auth',
+    '@nuxtjs/dotenv',
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    baseURL: 'http://localhost:3000',
+    proxy: true,
+    prefix: '/api/v1',
+  },
+  /**
+   * Auth module configuration
+   */
+  auth: {
+    resirect: {
+      login: '/login',
+      loguot: '/login',
+    },
+    strategies: {
+      local: {
+        endpointds: {
+          login: {
+            url: '/api/v1/auth/login',
+            method: 'post',
+            propertyName: 'jwt_token',
+          },
+          user: false,
+          loguot: false,
+        },
+      },
+    },
+  },
+  /**
+   * Proxy module configuration
+   * See https://github.com/nuxt-community/proxy-module
+   */
+  proxy: {
+    '/api/v1': {
+      target: 'http://localhost:3000',
+    },
+  },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
