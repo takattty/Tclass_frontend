@@ -83,6 +83,7 @@ export default {
     resirect: {
       login: '/login',
       loguot: '/login',
+      home: '/',
     },
     strategies: {
       local: {

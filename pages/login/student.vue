@@ -1,14 +1,6 @@
 <template>
-  <div class="SignupForms" data-app>
-    <!-- <v-app id="Login"> -->
-    <v-form ref="form" v-model="valid" lazy-validation class="SignupForm">
-      <v-text-field
-        v-model="name"
-        :rules="nameRules"
-        label="Name"
-        required
-      ></v-text-field>
-
+  <div class="LoginForms">
+    <v-form ref="form" v-model="valid" lazy-validation class="LoginForm">
       <v-text-field
         v-model="email"
         :rules="emailRules"
@@ -27,18 +19,7 @@
         @click:append="show1 = !show1"
       ></v-text-field>
 
-      <v-row align="center">
-        <v-col cols="12">
-          <v-select
-            v-model="status"
-            :items="items"
-            :menu-props="{ top: true, offsetY: true }"
-            label="your status"
-          ></v-select>
-        </v-col>
-      </v-row>
-
-      <v-btn large @click="Signup">新規登録</v-btn>
+      <v-btn large @click="Login">ログイン</v-btn>
     </v-form>
   </div>
 </template>
@@ -48,8 +29,6 @@ export default {
   layout: 'auth',
   data: () => ({
     valid: true,
-    name: '',
-    nameRules: [(v) => !!v || 'Name is required'],
     email: '',
     emailRules: [
       (v) => !!v || 'E-mail is required',
@@ -58,23 +37,17 @@ export default {
     password: '',
     show1: false,
     passwordRules: [(v) => !!v || 'password is required'],
-    status: '',
-    items: ['Student', 'Teacher'],
   }),
   methods: {
-    Signup() {
-      const accountData = {
-        account_create: {
-          user_name: this.name,
+    Login() {
+      const LoginData = {
+        auth: {
           email: this.email,
-          account_status: this.status,
-          lesson_lists: '[]',
           password: this.password,
-          password_confirmation: this.password,
         },
       }
       this.$axios
-        .$post('http://localhost:3000/api/v1/auth/account', accountData)
+        .post('http://localhost:3000/api/v1/auth/login', LoginData)
         .then((response) => {
           // eslint-disable-next-line no-console
           console.log(response)
@@ -85,17 +58,17 @@ export default {
 </script>
 
 <style scoped>
-.SignupForms {
+.LoginForms {
   text-align: center;
   width: 1000px;
 }
 
-.SignupForm {
+.LoginForm {
   padding: 10px;
 }
 
 @media screen and (max-width: 500px) {
-  .SignupForms {
+  .LoginForms {
     text-align: center;
     width: 360px;
   }

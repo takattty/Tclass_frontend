@@ -6,7 +6,7 @@
     </div>
     <div class="Login">
       <h1>アカウントをお持ちの方</h1>
-      <v-btn large>ログイン</v-btn>
+      <v-btn large to="/login" nuxt>ログイン</v-btn>
     </div>
   </div>
 </template>
