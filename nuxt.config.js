@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+require('dotenv').config()
 
 export default {
   /*
@@ -61,19 +62,23 @@ export default {
     '@nuxtjs/dotenv',
     '@nuxtjs/auth',
   ],
+  /**
+   * env modules configuration
+   */
+  env: {
+    API_URL: process.env.API_URL,
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: 'http://localhost:3000',
+    baseURL: process.env.API_URL,
     proxy: true,
-    prefix: '/api/v1',
   },
   /**
    * Auth module configuration
    */
-
   auth: {
     resirect: {
       login: '/login',
@@ -99,7 +104,10 @@ export default {
    */
   proxy: {
     '/api/v1': {
-      target: 'http://localhost:3000',
+      target: 'http://localhost:3000/api/v1',
+      pathRewrite: {
+        '^/api': '/',
+      },
     },
   },
   /*
