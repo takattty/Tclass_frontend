@@ -59,7 +59,7 @@ export default {
     show1: false,
     passwordRules: [(v) => !!v || 'password is required'],
     status: '',
-    items: ['Student', 'Teacher'],
+    items: ['student', 'teacher'],
   }),
   methods: {
     Signup() {

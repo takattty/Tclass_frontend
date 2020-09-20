@@ -2,14 +2,14 @@
   <div class="LoginForms">
     <v-form ref="form" v-model="valid" lazy-validation class="LoginForm">
       <v-text-field
-        v-model="email"
+        v-model="login.auth.email"
         :rules="emailRules"
         label="E-mail"
         required
       ></v-text-field>
 
       <v-text-field
-        v-model="password"
+        v-model="login.auth.password"
         :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
         :type="show1 ? 'text' : 'password'"
         :rules="passwordRules"
@@ -29,29 +29,53 @@ export default {
   layout: 'auth',
   data: () => ({
     valid: true,
-    email: '',
+    login: {
+      auth: {
+        email: '',
+        password: '',
+      },
+    },
+    // email: '',
     emailRules: [
       (v) => !!v || 'E-mail is required',
       (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
     ],
-    password: '',
+    // password: '',
     show1: false,
     passwordRules: [(v) => !!v || 'password is required'],
   }),
   methods: {
-    Login() {
-      const LoginData = {
-        auth: {
-          email: this.email,
-          password: this.password,
-        },
+    async Login() {
+      // eslint-disable-next-line no-console
+      console.log(this.login)
+      const response = await this.$auth.loginWith('local', {
+        data: this.login,
+      })
+      const jwtToken = response.data.jwt
+
+      const userContent = await this.$axios.$get(`/auth/account/`, {
+        params: { email: this.login.auth.email },
+      })
+      // eslint-disable-next-line no-console
+      console.log(userContent.data[0], jwtToken)
+      const userInfo = userContent.data[0]
+      const userId = userInfo.user_id
+      const status = userInfo.account_status
+      // eslint-disable-next-line no-console
+      console.log(userId, status)
+
+      const userAuth = {
+        jwtToken,
+        userId,
+        status,
       }
-      this.$axios
-        .post('http://localhost:3000/api/v1/auth/login', LoginData)
-        .then((response) => {
-          // eslint-disable-next-line no-console
-          console.log(response)
-        })
+
+      this.$store.dispatch('authenticate/loginauth/setInfo', userAuth, {
+        root: true,
+      })
+      this.$router.push('/login')
+      // eslint-disable-next-line no-console
+      console.log(response, this.$auth.loggedIn, this.$store.state.authenticate)
     },
   },
 }

@@ -73,28 +73,40 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: process.env.API_URL,
-    proxy: true,
+    baseURL: 'http://localhost:3000/',
+    // baseURL: process.env.API_URL,
+    // proxy: true,
+    // prefix: '/api/v1',
   },
   /**
    * Auth module configuration
    */
   auth: {
-    resirect: {
+    cookie: false,
+    localStorage: {
+      prefix: 'auth.',
+    },
+    redirect: {
       login: '/login',
-      loguot: '/login',
-      home: '/',
+      logout: '/login',
+      callback: false,
+      home: false,
     },
     strategies: {
       local: {
-        endpointds: {
+        endpoints: {
           login: {
-            url: '/api/v1/auth/login',
+            url: '/auth/login',
             method: 'post',
-            propertyName: 'jwt_token',
+            propertyName: 'token',
           },
+          // user: {
+          //   url: '/auth/account',
+          //   method: 'get',
+          //   propertyName: 'user',
+          // },
           user: false,
-          loguot: false,
+          logout: false,
         },
       },
     },
@@ -103,14 +115,9 @@ export default {
    * Proxy module configuration
    * See https://github.com/nuxt-community/proxy-module
    */
-  proxy: {
-    '/api/v1': {
-      target: 'http://localhost:3000/api/v1',
-      pathRewrite: {
-        '^/api': '/',
-      },
-    },
-  },
+  // proxy: {
+  //   '/api/v1': 'http://backend:3000/',
+  // },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
