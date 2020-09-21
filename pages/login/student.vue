@@ -73,7 +73,7 @@ export default {
       this.$store.dispatch('authenticate/loginauth/setInfo', userAuth, {
         root: true,
       })
-      this.$router.push('/login')
+      this.$router.push('/student')
       // eslint-disable-next-line no-console
       console.log(response, this.$auth.loggedIn, this.$store.state.authenticate)
     },
