@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>This is default layout page</h1>
+    <nuxt />
   </div>
   <!-- <v-app dark>
     <v-navigation-drawer
