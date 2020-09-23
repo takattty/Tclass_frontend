@@ -102,7 +102,7 @@ export default {
       }
     }
     // eslint-disable-next-line no-console
-    console.log(reportArrays)
+    // console.log(reportArrays)
     this.reports = reportArrays
   },
 }

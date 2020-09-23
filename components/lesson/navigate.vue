@@ -1,12 +1,17 @@
 <template>
   <div class="navigate">
     <div class="navigateComponent">
-      <v-btn id="navBtn" large :to="`/student/lesson/${this.$route.params.id}`"
-        >Home</v-btn
-      >
+      <v-btn id="navBtn" large :to="`/student/reportindex`">全課題一覧</v-btn>
       <v-btn id="navBtn" large>{{ lessonName }}</v-btn>
-      <v-btn id="navBtn" large>教材</v-btn>
-      <v-btn id="navBtn" large>レポート</v-btn>
+      <v-btn id="navBtn" large :to="`/student/lesson/${this.$route.params.id}`"
+        >教材</v-btn
+      >
+      <v-btn
+        id="navBtn"
+        large
+        :to="`/student/lesson/${this.$route.params.id}/myreport`"
+        >【{{ lessonName }}】課題</v-btn
+      >
       <v-btn id="navBtn" large>出欠</v-btn>
       <v-btn id="navBtn" large @click="AccountContent">ユーザー情報</v-btn>
       <v-btn id="navBtn" large @click="Logout">ログアウト</v-btn>
@@ -29,7 +34,7 @@ export default {
     }
     const lessonsName = textLessonName.name.card_title
     // eslint-disable-next-line no-console
-    console.log(textLessonName.name.card_title)
+    // console.log(textLessonName.name.card_title)
     this.lessonName = lessonsName
   },
   methods: {
@@ -38,12 +43,13 @@ export default {
       this.$router.push({ path: `/student/account/${userId}` })
     },
     async Logout() {
+      // eslint-disable-next-line no-unused-vars
       const response = await this.$store.dispatch(
         'authenticate/loginauth/deleteInfo',
         { root: true }
       )
       // eslint-disable-next-line no-console
-      console.log('Logout', response, this.$store.state.authenticate.loginauth)
+      // console.log('Logout', response, this.$store.state.authenticate.loginauth)
       this.$router.push('/login')
     },
   },

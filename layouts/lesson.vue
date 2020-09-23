@@ -3,7 +3,7 @@
     <div class="LessonNavigate">
       <lessonNavigate />
     </div>
-    <div class="LessonContent">
+    <div class="LessonsContent">
       <v-card class="mx-auto" width="1400">
         <nuxt />
       </v-card>
@@ -21,7 +21,7 @@ export default {
 </script>
 
 <style scoped>
-.LessonContent {
+.LessonsContent {
   display: flex;
   justify-content: center;
   align-items: center;
