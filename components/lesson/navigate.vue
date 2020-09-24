@@ -1,18 +1,11 @@
 <template>
   <div class="navigate">
     <div class="navigateComponent">
-      <v-btn id="navBtn" large :to="`/student/reportindex`">全課題一覧</v-btn>
+      <v-btn id="navBtn" large @click="ReportIndex">全課題一覧</v-btn>
       <v-btn id="navBtn" large>{{ lessonName }}</v-btn>
-      <v-btn id="navBtn" large :to="`/student/lesson/${this.$route.params.id}`"
-        >教材</v-btn
-      >
-      <v-btn
-        id="navBtn"
-        large
-        :to="`/student/lesson/${this.$route.params.id}/myreport`"
-        >【{{ lessonName }}】課題</v-btn
-      >
-      <v-btn id="navBtn" large>出欠</v-btn>
+      <v-btn id="navBtn" large @click="Text">教材</v-btn>
+      <v-btn id="navBtn" large @click="Task">【{{ lessonName }}】課題</v-btn>
+      <v-btn id="navBtn" large @click="Attend">出欠</v-btn>
       <v-btn id="navBtn" large @click="AccountContent">ユーザー情報</v-btn>
       <v-btn id="navBtn" large @click="Logout">ログアウト</v-btn>
     </div>
@@ -38,9 +31,34 @@ export default {
     this.lessonName = lessonsName
   },
   methods: {
+    ReportIndex() {
+      const userStatus = this.$store.state.authenticate.loginauth.userAuth
+        .status
+      this.$router.push({ path: `/${userStatus}/reportindex` })
+    },
+    Text() {
+      const userStatus = this.$store.state.authenticate.loginauth.userAuth
+        .status
+      const lessonId = this.$route.params.id
+      this.$router.push({ path: `/${userStatus}/lesson/${lessonId}` })
+    },
+    Task() {
+      const userStatus = this.$store.state.authenticate.loginauth.userAuth
+        .status
+      const lessonId = this.$route.params.id
+      this.$router.push(`/${userStatus}/lesson/${lessonId}/myreport`)
+    },
+    Attend() {
+      const userStatus = this.$store.state.authenticate.loginauth.userAuth
+        .status
+      const lessonId = this.$route.params.id
+      this.$router.push(`/${userStatus}/lesson/${lessonId}/attendance`)
+    },
     AccountContent() {
+      const userStatus = this.$store.state.authenticate.loginauth.userAuth
+        .status
       const userId = this.$store.state.authenticate.loginauth.userAuth.userId
-      this.$router.push({ path: `/student/account/${userId}` })
+      this.$router.push({ path: `/${userStatus}/account/${userId}` })
     },
     async Logout() {
       // eslint-disable-next-line no-unused-vars
