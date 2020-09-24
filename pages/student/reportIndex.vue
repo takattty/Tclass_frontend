@@ -38,44 +38,6 @@
         </v-simple-table>
       </v-card>
     </div>
-    <div class="reportCard">
-      <v-card class="mx-auto" width="1400">
-        <div class="cardTitle">
-          <v-card-title> 課題一覧 </v-card-title>
-        </div>
-        <v-simple-table class="table">
-          <template v-slot:default>
-            <thead>
-              <tr>
-                <th class="text-left">課題名</th>
-                <th class="text-left">提出期限</th>
-                <th class="text-left">授業ID</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                v-for="eachReportObject in reports"
-                :key="eachReportObject.id"
-              >
-                <td class="reporttext">
-                  <router-link
-                    :to="{
-                      path: `/student/lesson/${eachReportObject.lesson_id}`,
-                    }"
-                  >
-                    {{ eachReportObject.report_name }}
-                  </router-link>
-                </td>
-                <td class="reporttext">
-                  {{ eachReportObject.report_finish_date }}
-                </td>
-                <td class="reporttext">{{ eachReportObject.lesson_id }}</td>
-              </tr>
-            </tbody>
-          </template>
-        </v-simple-table>
-      </v-card>
-    </div>
   </div>
 </template>
 

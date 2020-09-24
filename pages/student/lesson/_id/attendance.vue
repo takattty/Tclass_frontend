@@ -75,7 +75,7 @@ export default {
           `/lesson/${this.$route.params.id}/attendance/${attendId}`,
           attendUpdate
         )
-        this.$router.push(`/student/lesson/${this.$route.params.id}/attendance`)
+        this.$router.push(`/student/lesson/${this.$route.params.id}`)
         // eslint-disable-next-line no-console
         console.log(response)
       } else {
