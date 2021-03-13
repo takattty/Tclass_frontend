@@ -65,12 +65,11 @@ export default {
     Signup() {
       const accountData = {
         account_create: {
-          user_name: this.name,
+          name: this.name,
           email: this.email,
-          account_status: this.status,
-          lesson_lists: '[]',
           password: this.password,
           password_confirmation: this.password,
+          account_status: this.status,
         },
       }
       this.$axios
@@ -79,6 +78,7 @@ export default {
           // eslint-disable-next-line no-console
           console.log(response)
         })
+      this.$router.push('/login')
     },
   },
 }
