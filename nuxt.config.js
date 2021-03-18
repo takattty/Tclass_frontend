@@ -100,11 +100,6 @@ export default {
             method: 'post',
             propertyName: 'token',
           },
-          // user: {
-          //   url: '/auth/account',
-          //   method: 'get',
-          //   propertyName: 'user',
-          // },
           user: false,
           logout: false,
         },

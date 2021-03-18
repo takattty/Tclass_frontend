@@ -2,7 +2,7 @@
   <div class="AccountContent">
     <div class="Account">
       <h1>ユーザー名</h1>
-      <p>{{ dataContent.user_name }}</p>
+      <p>{{ dataContent.name }}</p>
     </div>
     <div class="Account">
       <h1>ユーザーメールアドレス</h1>

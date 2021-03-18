@@ -56,13 +56,9 @@ export default {
       const userContent = await this.$axios.$get(`/auth/account/`, {
         params: { email: this.login.auth.email },
       })
-      // eslint-disable-next-line no-console
-      console.log(userContent.data[0], jwtToken)
-      const userInfo = userContent.data[0]
-      const userId = userInfo.user_id
+      const userInfo = userContent.data
+      const userId = userInfo.id
       const status = userInfo.account_status
-      // eslint-disable-next-line no-console
-      console.log(userId, status)
 
       const userAuth = {
         jwtToken,
